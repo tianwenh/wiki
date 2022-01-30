@@ -2,7 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@tianwenh/eslint-config': ^0.1.1
-  '@tianwenh/ssgpage-theme-wiki': ^0.1.1
+  '@tianwenh/ssgpage-theme-wiki': ^0.1.2
   '@tianwenh/vite-plugin-ssgpage': ^0.4.0
   '@types/node': ^17.0.13
   '@types/react': ^17.0.38
@@ -19,7 +19,7 @@ specifiers:
   vite: ^2.7.13
 
 dependencies:
-  '@tianwenh/ssgpage-theme-wiki': 0.1.1_8e21aec7ac048a2d6b03d7dadbe19973
+  '@tianwenh/ssgpage-theme-wiki': 0.1.2_8e21aec7ac048a2d6b03d7dadbe19973
   katex: 0.15.2
   normalize.css: 8.0.1
   prismjs: 1.26.0
@@ -421,8 +421,8 @@ packages:
       - typescript
     dev: true
 
-  /@tianwenh/ssgpage-theme-wiki/0.1.1_8e21aec7ac048a2d6b03d7dadbe19973:
-    resolution: {integrity: sha512-fgNX8fmmp60Vjww3txna/rpUcOGaetKD9o1QN1R0uIc4vB8eezCB48MjHPDypSX6yP7CCq3inQ0ksvv4Xydy3w==}
+  /@tianwenh/ssgpage-theme-wiki/0.1.2_8e21aec7ac048a2d6b03d7dadbe19973:
+    resolution: {integrity: sha512-FhdCHJXISc/SkvrdNDJs/kE0hTA3sOeAW6koeth9BugToVZ3kjSVebChwbTI7yeQAtlwGBr2Ff0D9f0FIPFuCg==}
     peerDependencies:
       '@tianwenh/vite-plugin-ssgpage': '*'
       vite: ^2.7.13
