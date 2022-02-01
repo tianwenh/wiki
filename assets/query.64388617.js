@@ -1,6 +1,16 @@
 var n=[{routepath:"README",content:`## Home page
 
 This is a demo for wiki theme. No frontmatter is provided.
+`},{routepath:"folder1/file1",content:`---
+title: Hello file1
+date: 2021-02-20
+subtitle: This is a demo mdx file
+tags:
+  - markdown
+  - folder1
+---
+
+file1
 `},{routepath:"hello-world",content:`---
 title: Hello world
 date: 2021-02-25
@@ -125,16 +135,6 @@ export const test = 'frontmatter test';
 $$
 e^{j\\theta} = cos(\\theta) + jsin(\\theta)
 $$
-`},{routepath:"folder1/file1",content:`---
-title: Hello file1
-date: 2021-02-20
-subtitle: This is a demo mdx file
-tags:
-  - markdown
-  - folder1
----
-
-file1
 `},{routepath:"folder1/nested/file2",content:`---
 title: Hello file2
 date: 2021-02-20
