@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="description" content="wiki about music" />
+  <meta name="author" content="tianwenh">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAt9JREFUWEftV01IYmEUPZ+EiwgiWoiLoCct0wqEqIiCoLICRQg3/VC0mmgTQTXOZDkktGhRkJTSjxW4qKhVFJlCRKsWtShoU5ua2QRKirapF/dCMeYIMfFy44W3efreOd+5557vfQKASpKk7wC+CSG0+IKSZfkPAPfNzY1LSJL0Qwjx6wtwUyBkWf5JBH5/1crfMyAlhE6nkzOx+lfMLIGsAikKmEwm2Gw27Ozs8EU1NDSE0tLSD3k1Go1iYGAAXq8XKpUKfX19kOX0Pk8hQA+Mjo5iZmYGs7OzDLqwsICqqqokArm5uRBCIB6PJwFcXV2hvb0dgUAAkiShsrIS9/f3acl/iMC/nj4+PoZWq0V5eTlo1e9rcXER9fX1sFqtOD8/55/Hx8fR2tqKcDiMxsZGvqcYgbGxMXR3d3M7dnd3GWxra4sJU1VUVODh4UE5Al1dXXA4HJiamoLH42HQs7MzRCIRFBUVvSmjmAJ1dXVYWlrC+vo6E9FoNDg5OcHy8jJ6enrY2Nvb2xAmkynJotQzMuLfJvwfDxQXF+Pw8BChUIjfV1NTg9XVVXR2dmJtbQ1utxvT09MQcpoZ+SyBnJwcXF5e4vr6Gs3NzaCWkC/KysoQDAZxenqK/v5+CIfDkaRAdXU1O/SzBEg1Wn1hYSEMBgOcTicaGhpYCb/fj/z8fLS0tChnQiKwsrKC2tpaGI1GzM3N4enpiVvgcrlgsVg43BQzIRGYmJhAR0cHzGYzKBf29vbYkK9hRzmhKIHe3l7Y7Xa+JicnuQ0+n49bQaM5PDysLIFXoP39fTQ1NfH4HR0dcURTVJMiiipQUlICAo/FYsjLywNlw+3tLWhCLi4ukEgklCWgVqsZiHbFx8dH6PV6PD8/c6wcHBxAp9OlEmhra2OnbmxsYHNzM+0uRkFCI0ay0o6Yrubn51FQUIC7uzsMDg6+/W1kZIT3g+wXUVaBzCuQ8aNZxg+nmT6evwD1qc7gHFaxDAAAAABJRU5ErkJggg==" />
+  <title>HTWiki</title>
+  <script type="module" crossorigin src="/assets/index.8c1db089.js"></script>
+  <link rel="modulepreload" href="/assets/vendor.6c175473.js">
+  <link rel="stylesheet" href="/assets/index.7e1e9a36.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="layout-container"><main class="main-container"><h3 class="layout-head"><button class="svg-button burger-icon"><svg aria-label="menu" role="img" viewBox="0 0 24 24" height="30" width="30" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></button><a href="/">HTWiki</a><span class="dark-toggle">🌔</span></h3><header><h2 class="page-title"><a href="/typescript/guideline">guideline</a></h2><small></small></header><hr/><h2 id="guideline"><a class="header-anchor" href="#guideline">#</a>Guideline</h2>
+<p>My guideline for writing TS types.</p>
+<h2 id="essential-building-blocks"><a class="header-anchor" href="#essential-building-blocks">#</a>Essential building blocks</h2>
+<p>These are features of TS you should know:</p>
+<h3 id="primitive-types"><a class="header-anchor" href="#primitive-types">#</a>Primitive types</h3>
+<ul>
+<li>boolean</li>
+<li>number / bigint</li>
+<li>string</li>
+<li>unique symbol</li>
+<li>void / undefined</li>
+<li>null</li>
+<li>unknown</li>
+<li>never</li>
+<li>any</li>
+</ul>
+<h3 id="structural-types"><a class="header-anchor" href="#structural-types">#</a>&quot;Structural&quot; types</h3>
+<p>Structural type is not a formal term. It means type from composition of multiple types.</p>
+<ul>
+<li>array / tuple <code>T[]</code> / <code>[T]</code>
+<ul>
+<li><a target="_blank" href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types">variadic-tuple-types</a></li>
+</ul>
+</li>
+<li>object <code>{x: 1}</code></li>
+<li>union <code>T | U</code></li>
+<li>intersection <code>T &amp; U</code></li>
+<li>function <code>(x: T) =&gt; U</code></li>
+</ul>
+<h3 id="type-operations"><a class="header-anchor" href="#type-operations">#</a>Type Operations</h3>
+<ul>
+<li>index <code>keyof T</code>: object to union</li>
+<li>lookup <code>T[K]</code>: tuple to union</li>
+<li>mapped <code>{[Key in K]: X}</code>: map object / array</li>
+<li>conditional <code>T extends U ? X : Y</code>: if else<!-- -->
+<ul>
+<li><a target="_blank" href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types">inference</a> <code>infer</code>
+<ul>
+<li>naked type / <a target="_blank" href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types">distributive</a></li>
+<li>boxed type <code>[T] extends [never]</code></li>
+<li>covariance vs contravariance</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="subtype"><a class="header-anchor" href="#subtype">#</a>Subtype</h2>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">U</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name"><span class="token constant">U</span></span> <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="any"><a class="header-anchor" href="#any">#</a>any</h3>
+<pre class="language-ts"><code class="language-ts"><span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span>bigint<span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token operator">&gt;</span> <span class="token comment">// false</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">,</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span> <span class="token comment">// false</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token keyword">undefined</span><span class="token punctuation">,</span> <span class="token keyword">void</span><span class="token operator">&gt;</span> <span class="token comment">// true</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token comment">// true, string is everything union</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span> <span class="token comment">// boolean, distributive</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span> <span class="token comment">// false</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span> <span class="token comment">// true!! top type, everything is assignable to unknown by design</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token operator">&gt;</span> <span class="token comment">// false</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span> <span class="token comment">// never!!</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">|</span><span class="token number">2</span><span class="token operator">&gt;</span> <span class="token comment">// true</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token number">1</span><span class="token operator">|</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">&gt;</span> <span class="token comment">// boolean, distributive</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>a<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token comment">// true</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>a<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token comment">// false</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>a<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token comment">// false</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>a<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token comment">// true</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token builtin">number</span><span class="token operator">&gt;</span> <span class="token comment">// true, covariance and contravariance</span>
+<span class="token maybe-class-name">IsSubtype</span><span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">:</span> <span class="token string">&#x27;1&#x27;</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token string">&#x27;2&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token operator">:</span> <span class="token builtin">never</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token string">&#x27;2&#x27;</span><span class="token operator">|</span><span class="token number">2</span><span class="token operator">&gt;</span> <span class="token comment">// true</span>
+</code></pre>
+<h2 id="type-conversions"><a class="header-anchor" href="#type-conversions">#</a>Type conversions</h2>
+<p>Possibly the most practical part.</p>
+<p>Writing TS type is about converting between type (<a href="#primitive-types">primitive</a> or <a href="#structural-types">composed</a>) with <a href="#type-operations">type operations</a>.</p>
+<p>Check out [[type-challenges]] for applications.</p>
+<h3 id="string--number--bigint--boolean--null--undefined-to-string"><a class="header-anchor" href="#string--number--bigint--boolean--null--undefined-to-string">#</a>string | number | bigint | boolean | null | undefined to string</h3>
+<ul>
+<li>template literal types</li>
+<li>conditional</li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Allowed</span></span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> bigint <span class="token operator">|</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">NumberToString</span><span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token maybe-class-name">Allowed</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">T</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">StringOnly</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name"><span class="token maybe-class-name">Allowed</span></span> <span class="token operator">?</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">T</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span> <span class="token operator">:</span> <span class="token builtin">never</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="object-to-union"><a class="header-anchor" href="#object-to-union">#</a>object to union</h3>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">ObjectToUnion</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>index</li>
+</ul>
+<h3 id="tuple-to-union"><a class="header-anchor" href="#tuple-to-union">#</a>tuple to union</h3>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">TupleToUnion</span><span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token builtin">unknown</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>generic constraints</li>
+<li>lookup</li>
+</ul>
+<h3 id="tuple-to-object"><a class="header-anchor" href="#tuple-to-object">#</a>tuple to object</h3>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">TupleToObject</span><span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token keyword">readonly</span> <span class="token maybe-class-name">PropertyKey</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">unknown</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>generic constraints</li>
+<li>mapped</li>
+<li>lookup</li>
+</ul>
+<h3 id="union-to-intersection"><a class="header-anchor" href="#union-to-intersection">#</a>union to intersection</h3>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Dist</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name"><span class="token constant">T</span></span> <span class="token operator">?</span> <span class="token punctuation">(</span>x<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token keyword">void</span> <span class="token operator">:</span> <span class="token builtin">never</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Contra</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span>x<span class="token operator">:</span> infer <span class="token constant">X</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token builtin">unknown</span> <span class="token operator">?</span> <span class="token constant">X</span> <span class="token operator">:</span> <span class="token builtin">never</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">UnionToIntersection</span><span class="token operator">&lt;</span><span class="token constant">U</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Contra</span><span class="token operator">&lt;</span><span class="token maybe-class-name">Dist</span><span class="token operator">&lt;</span><span class="token constant">U</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">;</span>
+<span class="token comment">// X|Y</span>
+<span class="token comment">// Dist&lt;X|Y&gt; = (x: X) =&gt; void | (x: Y) =&gt; void;</span>
+<span class="token comment">// UnionToIntersection&lt;X|Y&gt; = X&amp;Y</span>
+</code></pre>
+<ul>
+<li>conditional<!-- -->
+<ul>
+<li>distributive: <code>Dist</code></li>
+<li>contravariance: <code>Contra</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="union-to-tuple"><a class="header-anchor" href="#union-to-tuple">#</a>union to tuple</h3>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">LastInUnion</span><span class="token operator">&lt;</span><span class="token constant">U</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Contra</span><span class="token operator">&lt;</span><span class="token maybe-class-name">UnionToIntersection</span><span class="token operator">&lt;</span><span class="token maybe-class-name">Dist</span><span class="token operator">&lt;</span><span class="token constant">U</span><span class="token operator">&gt;&gt;&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">UnionToTuple</span><span class="token operator">&lt;</span><span class="token constant">U</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Last</span> <span class="token operator">=</span> <span class="token maybe-class-name">LastInUnion</span><span class="token operator">&lt;</span><span class="token constant">U</span><span class="token operator">&gt;&gt;</span></span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token constant">U</span><span class="token punctuation">]</span> <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token builtin">never</span><span class="token punctuation">]</span>
+  <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token spread operator">...</span><span class="token maybe-class-name">UnionToTuple</span><span class="token operator">&lt;</span><span class="token maybe-class-name">Exclude</span><span class="token operator">&lt;</span><span class="token constant">U</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Last</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Last</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>funciton overload <code>LastInUnion</code></li>
+<li>is never</li>
+</ul>
+<h3 id="object-to-tuple"><a class="header-anchor" href="#object-to-tuple">#</a>object to tuple</h3>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">ObjectToTuple</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">UnionToTuple</span><span class="token operator">&lt;</span><span class="token maybe-class-name">ObjectToUnion</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="object-to-intersection"><a class="header-anchor" href="#object-to-intersection">#</a>object to intersection</h3>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">ObjectToIntersection</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">UnionToIntersection</span><span class="token operator">&lt;</span><span class="token maybe-class-name">ObjectToUnion</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="union-to-object"><a class="header-anchor" href="#union-to-object">#</a>union to object</h3>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">UnionToObject</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">TupleToObject</span><span class="token operator">&lt;</span><span class="token maybe-class-name">UnionToTuple</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="tuple-to-intersection"><a class="header-anchor" href="#tuple-to-intersection">#</a>tuple to intersection</h3>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">TupleToIntersection</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">UnionToIntersection</span><span class="token operator">&lt;</span><span class="token maybe-class-name">TupleToUnion</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="miscs"><a class="header-anchor" href="#miscs">#</a>Miscs</h2>
+<ul>
+<li>Recursion<!-- -->
+<ul>
+<li>depth 49</li>
+<li>tail call depth 999</li>
+</ul>
+</li>
+<li><a target="_blank" href="https://github.com/microsoft/TypeScript/issues/14833">https://github.com/microsoft/TypeScript/issues/14833</a></li>
+<li><a target="_blank" href="https://github.com/Microsoft/TypeScript/issues/27024#issuecomment-421529650">https://github.com/Microsoft/TypeScript/issues/27024#issuecomment-421529650</a></li>
+<li><a target="_blank" href="https://github.com/sandersn/mini-typescript">https://github.com/sandersn/mini-typescript</a></li>
+<li><a target="_blank" href="https://basarat.gitbook.io/typescript/overview">https://basarat.gitbook.io/typescript/overview</a></li>
+<li><a target="_blank" href="https://github.com/microsoft/TypeScript-Compiler-Notes">https://github.com/microsoft/TypeScript-Compiler-Notes</a></li>
+</ul><hr/><footer>EOF</footer></main><aside class="aside-container"><h3 class="layout-head"><div><a href="/">HTWiki</a><span class="dark-toggle">🌔</span></div><button class="svg-button close-icon"><svg aria-label="close" role="img" viewBox="0 0 24 24" height="30" width="30" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></button></h3><div class="search-bar"><svg aria-label="search" role="img" viewBox="0 0 16 16" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z"></path></svg><input type="text" class="search-input" aria-label="Search" placeholder="Search..."/></div><div class="aside-content"><ul><li><span class="arrow open">typescript</span><ul><li><a aria-current="page" class="active" href="/typescript/guideline">guideline</a></li><li><a class="" href="/typescript/type-challenges">type-challenges</a></li></ul></li><li><a class="" href="/README">README</a></li></ul></div></aside></div>
+  </div>
+  
+</body>
+
+</html>
