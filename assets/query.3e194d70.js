@@ -43,13 +43,26 @@ Structural type is not a formal term. It means type from composition of multiple
     - boxed type \`[T] extends [never]\`
     - covariance vs contravariance
 
-## Subtype
+### Subtype
+
+Conditional type (if else, type constraints, pattern matching) heavily depends on subtype.
 
 \`\`\`ts
 type IsSubtype<T, U> = T extends U ? true : false;
 \`\`\`
 
-### any
+Mental model:
+
+\`\`\`ts
+declare const t: T;
+// U has wider range of possibility, includes T as one possibility.
+const u: U = t; // ok
+
+declare const u: U;
+const t: T = u; // error
+\`\`\`
+
+Common subtypes:
 
 \`\`\`ts
 IsSubtype<bigint, number> // false
@@ -63,6 +76,10 @@ IsSubtype<string, never> // false
 IsSubtype<never, string> // never!!
 IsSubtype<1, 1|2> // true
 IsSubtype<1|2, 1> // boolean, distributive
+IsSubtype<[1], [1|2]> // true
+IsSubtype<[1|2], [1]> // false
+IsSubtype<[1, 2], [1]> // false
+IsSubtype<[1], [1, 2]> // false
 IsSubtype<{a: 1}, {}> // true
 IsSubtype<{}, {a: 1}> // false
 IsSubtype<{a: number}, {a: 1}> // false
