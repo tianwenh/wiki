@@ -22,9 +22,10 @@ These are features of TS you should know:
 
 Structural type is not a formal term. It means type from composition of multiple types.
 
-- array / tuple `T[]` / `[T]`
-  - [variadic-tuple-types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
-- object `{x: 1}`
+- product
+  - array / tuple `T[]` / `[T]`
+    - [variadic-tuple-types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
+  - object `{x: 1}`
 - union `T | U`
 - intersection `T & U`
 - function `(x: T) => U`
@@ -70,7 +71,7 @@ IsSubtype<any, string> // boolean, distributive
 IsSubtype<unknown, string> // false
 IsSubtype<string, unknown> // true!! top type, everything is assignable to unknown by design
 IsSubtype<string, never> // false
-IsSubtype<never, string> // never!!
+IsSubtype<never, string> // never!! distribute nothing, thus never
 IsSubtype<1, 1|2> // true
 IsSubtype<1|2, 1> // boolean, distributive
 IsSubtype<[1], [1|2]> // true
@@ -95,14 +96,14 @@ Check out [[type-challenges]] for applications.
 
 ### string | number | bigint | boolean | null | undefined to string
 
-- template literal types
-- conditional
-
 ```ts
 type Allowed = string | number | bigint | boolean | null | undefined;
 type NumberToString<T extends Allowed> = `${T}`;
 type StringOnly<T> = T extends Allowed ? `${T}` : never;
 ```
+
+- template literal types
+- conditional
 
 ### object to union
 
