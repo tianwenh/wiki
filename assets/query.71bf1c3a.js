@@ -73,7 +73,7 @@ IsSubtype<any, string> // boolean, distributive
 IsSubtype<unknown, string> // false
 IsSubtype<string, unknown> // true!! top type, everything is assignable to unknown by design
 IsSubtype<string, never> // false
-IsSubtype<never, string> // never!!
+IsSubtype<never, string> // never!! distribute nothing, thus never
 IsSubtype<1, 1|2> // true
 IsSubtype<1|2, 1> // boolean, distributive
 IsSubtype<[1], [1|2]> // true
@@ -98,14 +98,14 @@ Check out [[type-challenges]] for applications.
 
 ### string | number | bigint | boolean | null | undefined to string
 
-- template literal types
-- conditional
-
 \`\`\`ts
 type Allowed = string | number | bigint | boolean | null | undefined;
 type NumberToString<T extends Allowed> = \`\${T}\`;
 type StringOnly<T> = T extends Allowed ? \`\${T}\` : never;
 \`\`\`
+
+- template literal types
+- conditional
 
 ### object to union
 
