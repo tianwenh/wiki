@@ -25,9 +25,10 @@ These are features of TS you should know:
 
 Structural type is not a formal term. It means type from composition of multiple types.
 
-- array / tuple \`T[]\` / \`[T]\`
-  - [variadic-tuple-types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
-- object \`{x: 1}\`
+- product
+  - array / tuple \`T[]\` / \`[T]\`
+    - [variadic-tuple-types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
+  - object \`{x: 1}\`
 - union \`T | U\`
 - intersection \`T & U\`
 - function \`(x: T) => U\`
