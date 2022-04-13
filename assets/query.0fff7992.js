@@ -161,6 +161,14 @@ type UnionToTuple<U, Last = LastInUnion<U>> = [U] extends [never]
   : [...UnionToTuple<Exclude<U, Last>>, Last];
 \`\`\`
 
+\`\`\`ts
+type Fns = ((a: string) => number) | ((a: number) => string);
+type OverloadFns = UnionToIntersection<Fns>;
+declare const f: OverloadFns;
+f(1); // string
+f('1'); // number
+\`\`\`
+
 - funciton overload \`LastInUnion\`
 - is never
 
@@ -197,7 +205,8 @@ type TupleToIntersection<T> = UnionToIntersection<TupleToUnion<T>>;
 - https://github.com/Microsoft/TypeScript/issues/27024#issuecomment-421529650
 - https://github.com/sandersn/mini-typescript
 - https://basarat.gitbook.io/typescript/overview
-- https://github.com/microsoft/TypeScript-Compiler-Notes`},{routepath:"typescript/type-challenges",content:`## Type challenges
+- https://github.com/microsoft/TypeScript-Compiler-Notes
+`},{routepath:"typescript/type-challenges",content:`## Type challenges
 
 My type challenges speed run.
 
