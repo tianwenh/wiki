@@ -162,6 +162,11 @@ type UnionToTuple<U, Last = LastInUnion<U>> = [U] extends [never]
 ```ts
 type Fns = ((a: string) => number) | ((a: number) => string);
 type OverloadFns = UnionToIntersection<Fns>;
+// similar to
+interface OverloadFns {
+  (a: string): number;
+  (a: number): string;
+}
 declare const f: OverloadFns;
 f(1); // string
 f('1'); // number
