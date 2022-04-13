@@ -141,8 +141,8 @@ type TupleToObject<T extends readonly PropertyKey[]> = {
 
 \`\`\`ts
 type Dist<T> = T extends T ? (x: T) => void : never;
-type Contra<T> = T extends (x: infer X) => unknown ? X : never;
-type UnionToIntersection<U> = Contra<Dist<U>>;
+type OverloadContra<T> = [T] extends [(x: infer X) => unknown] ? X : never;
+type UnionToIntersection<U> = OverloadContra<Dist<U>>;
 // X|Y
 // Dist<X|Y> = (x: X) => void | (x: Y) => void;
 // UnionToIntersection<X|Y> = X&Y
