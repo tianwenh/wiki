@@ -158,6 +158,14 @@ type UnionToTuple<U, Last = LastInUnion<U>> = [U] extends [never]
   : [...UnionToTuple<Exclude<U, Last>>, Last];
 ```
 
+```ts
+type Fns = ((a: string) => number) | ((a: number) => string);
+type OverloadFns = UnionToIntersection<Fns>;
+declare const f: OverloadFns;
+f(1); // string
+f('1'); // number
+```
+
 - funciton overload `LastInUnion`
 - is never
 
