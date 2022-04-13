@@ -86,7 +86,8 @@ IsSubtype<{}, {a: 1}> // false
 IsSubtype<{a: number}, {a: 1}> // false
 IsSubtype<{a: 1}, {a: number}> // true
 IsSubtype<((x: number) => 1), (x: 1) => number> // true, covariance and contravariance
-IsSubtype<((x: 1) => 2)&((x: '1') => '2'), (x: never) => '2'|2> // true
+IsSubtype<((x: 1) => 2)&((x: '1') => '2'), (x: 1) => 2> // true, function overload
+IsSubtype<((x: 1) => 2)&((x: '1') => '2'), (x: '1') => '2'> // true, function overload
 \`\`\`
 
 ## Type conversions
