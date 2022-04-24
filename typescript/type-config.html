@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="description" content="wiki about music" />
+  <meta name="author" content="tianwenh">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAt9JREFUWEftV01IYmEUPZ+EiwgiWoiLoCct0wqEqIiCoLICRQg3/VC0mmgTQTXOZDkktGhRkJTSjxW4qKhVFJlCRKsWtShoU5ua2QRKirapF/dCMeYIMfFy44W3efreOd+5557vfQKASpKk7wC+CSG0+IKSZfkPAPfNzY1LSJL0Qwjx6wtwUyBkWf5JBH5/1crfMyAlhE6nkzOx+lfMLIGsAikKmEwm2Gw27Ozs8EU1NDSE0tLSD3k1Go1iYGAAXq8XKpUKfX19kOX0Pk8hQA+Mjo5iZmYGs7OzDLqwsICqqqokArm5uRBCIB6PJwFcXV2hvb0dgUAAkiShsrIS9/f3acl/iMC/nj4+PoZWq0V5eTlo1e9rcXER9fX1sFqtOD8/55/Hx8fR2tqKcDiMxsZGvqcYgbGxMXR3d3M7dnd3GWxra4sJU1VUVODh4UE5Al1dXXA4HJiamoLH42HQs7MzRCIRFBUVvSmjmAJ1dXVYWlrC+vo6E9FoNDg5OcHy8jJ6enrY2Nvb2xAmkynJotQzMuLfJvwfDxQXF+Pw8BChUIjfV1NTg9XVVXR2dmJtbQ1utxvT09MQcpoZ+SyBnJwcXF5e4vr6Gs3NzaCWkC/KysoQDAZxenqK/v5+CIfDkaRAdXU1O/SzBEg1Wn1hYSEMBgOcTicaGhpYCb/fj/z8fLS0tChnQiKwsrKC2tpaGI1GzM3N4enpiVvgcrlgsVg43BQzIRGYmJhAR0cHzGYzKBf29vbYkK9hRzmhKIHe3l7Y7Xa+JicnuQ0+n49bQaM5PDysLIFXoP39fTQ1NfH4HR0dcURTVJMiiipQUlICAo/FYsjLywNlw+3tLWhCLi4ukEgklCWgVqsZiHbFx8dH6PV6PD8/c6wcHBxAp9OlEmhra2OnbmxsYHNzM+0uRkFCI0ay0o6Yrubn51FQUIC7uzsMDg6+/W1kZIT3g+wXUVaBzCuQ8aNZxg+nmT6evwD1qc7gHFaxDAAAAABJRU5ErkJggg==" />
+  <title>HTWiki</title>
+  <script type="module" crossorigin src="/assets/index.221d92dd.js"></script>
+  <link rel="stylesheet" href="/assets/index.e35a6c31.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="layout-container"><main class="main-container"><h3 class="layout-head"><button class="svg-button burger-icon"><svg aria-label="menu" role="img" viewBox="0 0 24 24" height="30" width="30" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></button><a href="/">HTWiki</a><span class="dark-toggle">🌔</span></h3><header><h2 class="page-title"><a href="/typescript/type-config">type-config</a></h2><small></small></header><hr/><h2 id="type-config"><a class="header-anchor" href="#type-config">#</a>Type config</h2>
+<p>The goal is to, at type level, constrain the dependency between bits.</p>
+<p>Suppose config type is as simple as:</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Config</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+  b<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Or</span>
+<span class="token keyword">function</span> <span class="token function">doThings</span><span class="token punctuation">(</span>enableA<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> enableB<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Here <code>a</code>, <code>b</code> should be independent. This however is just one of the states.</p>
+<h3 id="states"><a class="header-anchor" href="#states">#</a>States</h3>
+<ul>
+<li><code>11</code> (means <code>a=true b=true</code>)</li>
+<li><code>10</code></li>
+<li><code>01</code></li>
+<li><code>00</code></li>
+</ul>
+<h3 id="combinations"><a class="header-anchor" href="#combinations">#</a>Combinations</h3>
+<ul>
+<li>4 states C(4,4):<!-- -->
+<ul>
+<li><code>11 10 01 00</code></li>
+</ul>
+</li>
+<li>1 states C(4,1):<!-- -->
+<ul>
+<li><code>11</code> or <code>10</code> or <code>01</code> or <code>00</code></li>
+</ul>
+</li>
+<li>2 states C(4,2):<!-- -->
+<ul>
+<li><code>11 10</code> or <code>11 01</code> or <code>10 00</code> or <code>01 00</code></li>
+<li><code>10 01</code> or <code>11 00</code></li>
+</ul>
+</li>
+<li>3 states C(4,3):<!-- -->
+<ul>
+<li><code>11 10 00</code> or <code>11 01 00</code></li>
+<li><code>11 10 01</code> or <code>10 01 00</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Each subset combination needs to be constrained different!</strong></p>
+<h3 id="1-11-10-01-00"><a class="header-anchor" href="#1-11-10-01-00">#</a>1. <code>11 10 01 00</code></h3>
+<p>Config both.</p>
+<p>This is the most common case.</p>
+<ul>
+<li><code>a</code>: independent</li>
+<li><code>b</code>: independent</li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Config</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+  b<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="2-11-or-10-or-01-or-00"><a class="header-anchor" href="#2-11-or-10-or-01-or-00">#</a>2. <code>11</code> or <code>10</code> or <code>01</code> or <code>00</code></h3>
+<p>Config none.</p>
+<p>No config is needed.</p>
+<ul>
+<li><code>a</code>: fixed</li>
+<li><code>b</code>: fixed</li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Config</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  b<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="3-11-10-or-11-01-or-10-00-or-01-00"><a class="header-anchor" href="#3-11-10-or-11-01-or-10-00-or-01-00">#</a>3. <code>11 10</code> or <code>11 01</code> or <code>10 00</code> or <code>01 00</code></h3>
+<p>Config one.</p>
+<ul>
+<li><code>a</code>: independent</li>
+<li><code>b</code>: fixed</li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Config</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  b<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="4-10-01-or-11-00"><a class="header-anchor" href="#4-10-01-or-11-00">#</a>4. <code>10 01</code> or <code>11 00</code></h3>
+<p>Config one.</p>
+<ul>
+<li><code>a</code>: independent</li>
+<li><code>b</code>: dependent on <code>a</code>
+<ul>
+<li><code>a</code></li>
+<li>!<code>a</code></li>
+</ul>
+</li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">;</span>
+  b<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">;</span> <span class="token comment">// Opposite&lt;T&gt;;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Or just one param</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Config</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  ab<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="5-11-10-00-or-11-01-00-or-11-10-01-or-10-01-00"><a class="header-anchor" href="#5-11-10-00-or-11-01-00-or-11-10-01-or-10-01-00">#</a>5. <code>11 10 00</code> or <code>11 01 00</code> or <code>11 10 01</code> or <code>10 01 00</code></h3>
+<p>???</p>
+<ul>
+<li><code>a</code>: independent</li>
+<li><code>b</code>:<!-- -->
+<ul>
+<li>independent(<code>L</code>) if <code>a</code> is true(or false)(<code>Cond</code>)</li>
+<li>dependent if <code>a</code> is false(or true)(<code>R</code>)</li>
+</ul>
+</li>
+</ul>
+<p>Or</p>
+<ul>
+<li><code>b</code>: independent</li>
+<li><code>a</code>:<!-- -->
+<ul>
+<li>independent(<code>L</code>) if <code>b</code> is false(<code>Cond</code>)</li>
+<li>dependent if <code>b</code> is true(<code>R</code>)</li>
+</ul>
+</li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Box</span><span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">;</span>
+  b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Calc</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Cond</span><span class="token punctuation">,</span> <span class="token constant">L</span><span class="token punctuation">,</span> <span class="token constant">R</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name"><span class="token maybe-class-name">Cond</span></span> <span class="token operator">?</span> <span class="token maybe-class-name">Box</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">L</span><span class="token operator">&gt;</span> <span class="token operator">:</span> <span class="token maybe-class-name">Box</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">R</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Cond</span><span class="token punctuation">,</span> <span class="token constant">L</span><span class="token punctuation">,</span> <span class="token constant">R</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Calc</span><span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Cond</span><span class="token punctuation">,</span> <span class="token constant">L</span><span class="token punctuation">,</span> <span class="token constant">R</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Cfg</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span> <span class="token comment">// `11 10 01`</span>
+</code></pre>
+<h2 id="general-form"><a class="header-anchor" href="#general-form">#</a>General form</h2>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Box</span><span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">;</span>
+  b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Calc</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Cond</span><span class="token punctuation">,</span> <span class="token constant">L</span><span class="token punctuation">,</span> <span class="token constant">R</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name"><span class="token maybe-class-name">Cond</span></span> <span class="token operator">?</span> <span class="token maybe-class-name">Box</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">L</span><span class="token operator">&gt;</span> <span class="token operator">:</span> <span class="token maybe-class-name">Box</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">R</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Cond</span><span class="token punctuation">,</span> <span class="token constant">L</span><span class="token punctuation">,</span> <span class="token constant">R</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Calc</span><span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Cond</span><span class="token punctuation">,</span> <span class="token constant">L</span><span class="token punctuation">,</span> <span class="token constant">R</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+</code></pre>
+<p>In human language:</p>
+<p>If <code>Cond</code>, then <code>L</code>, else <code>R</code>.</p>
+<p>In fact, all above states can be expressed this way.</p>
+<p><strong>The more fixed params you have (Cond, L, R), the more obvious is the pattern.</strong></p>
+<pre class="language-ts"><code class="language-ts"><span class="token comment">// 1. 11 10 01 00</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_10_01_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token comment">// 2. `11` or `10` or `01` or `00`</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C10</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C01</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token comment">// 3. `11 10` or `11 01` or `10 00` or `01 00`</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_10</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_01</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C10_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C01_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token comment">// 4. `10 01` or `11 00`</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C10_01</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token comment">// 5. `11 10 00` or `11 01 00` or `11 10 01` or `10 01 00`</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_10_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token comment">// or type C11_10_00 = Config&lt;boolean, false, false, boolean&gt;;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_01_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_10_01</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C10_01_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Config</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="another-perspective"><a class="header-anchor" href="#another-perspective">#</a>Another perspective</h2>
+<ul>
+<li><code>State</code>: structure</li>
+<li><code>DependentState</code>: computation</li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">;</span>
+  b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// 1. 11 10 01 00</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_10_01_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token comment">// 2. `11` or `10` or `01` or `00`</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C10</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C01</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token comment">// 3. `11 10` or `11 01` or `10 00` or `01 00`</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_10</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_01</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C10_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C01_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">DependentState</span><span class="token operator">&lt;</span><span class="token constant">L</span><span class="token punctuation">,</span> <span class="token constant">R</span><span class="token punctuation">,</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name"><span class="token boolean">true</span></span>
+  <span class="token operator">?</span> <span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">R</span><span class="token operator">&gt;</span>
+  <span class="token operator">:</span> <span class="token maybe-class-name">State</span><span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">L</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token comment">// 4. `10 01` or `11 00`</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C10_01</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">DependentState</span><span class="token operator">&lt;</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">DependentState</span><span class="token operator">&lt;</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token comment">// 5. `11 10 00` or `11 01 00` or `11 10 01` or `10 01 00`</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_10_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">DependentState</span><span class="token operator">&lt;</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_01_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">DependentState</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C11_10_01</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">DependentState</span><span class="token operator">&lt;</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">C10_01_00</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">DependentState</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="conclusion"><a class="header-anchor" href="#conclusion">#</a>Conclusion</h2>
+<h3 id="program-breaks-down-by"><a class="header-anchor" href="#program-breaks-down-by">#</a>Program breaks down by:</h3>
+<ul>
+<li>static part:<!-- -->
+<ul>
+<li>type system</li>
+<li>syntax</li>
+<li>...</li>
+</ul>
+</li>
+<li>dynamic part:<!-- -->
+<ul>
+<li>code logic</li>
+</ul>
+</li>
+</ul>
+<p>Move towards static means:</p>
+<ul>
+<li>unit testing =&gt; type system checking</li>
+<li>documentation =&gt; wrting types</li>
+<li>ad-hoc behaviors =&gt; constrained possibility</li>
+</ul>
+<h4 id="real-story"><a class="header-anchor" href="#real-story">#</a>Real story</h4>
+<p>A lot of times, people just always use <code>C11_10_01_00</code>, whereas in reality code logic suggests <code>C11_10_00</code> for instance.</p>
+<p>To eliminate possibility other than <code>C11_10_00</code>, now you need to:</p>
+<ul>
+<li>write code logic to check</li>
+<li>write unit test to verify</li>
+<li>write document to tell readers</li>
+</ul>
+<p>Ok, why don&#x27;t we just define type <code>C11_10_00</code>? Yeah.. we can, but:</p>
+<ul>
+<li><code>C11_10_00</code> is hard to write, especially in languages without ADT</li>
+<li>Better write test for <code>C11_10_00</code>
+<ul>
+<li>Yes... in unsound language, like TS</li>
+<li>Fallback safe...</li>
+</ul>
+</li>
+<li>Hard to extend/modify, if typing (with type computation) is really complicated<!-- -->
+<ul>
+<li>Struggling making code compile</li>
+</ul>
+</li>
+</ul>
+<h3 id="type-breaks-down-by"><a class="header-anchor" href="#type-breaks-down-by">#</a>Type breaks down by:</h3>
+<ul>
+<li>static part:<!-- -->
+<ul>
+<li>primitive types</li>
+</ul>
+</li>
+<li>dynamic part:<!-- -->
+<ul>
+<li>polymorphisms</li>
+<li>abstract data type (array etc)</li>
+<li>dependent type</li>
+</ul>
+</li>
+</ul>
+<p>Move towards static means:</p>
+<ul>
+<li>generic type / constraints =&gt; hardcode primitive type</li>
+<li>easy to change/extend/think about...</li>
+</ul>
+<p>We always wish to move towards a generic solution with typing, that&#x27;s why fancy stuffs are introduced.</p>
+<p>However, code might be type checked in a situation where nothing can now be added anymore, or it won&#x27;t compile.</p><hr/><footer>EOF</footer></main><aside class="aside-container"><h3 class="layout-head"><div><a href="/">HTWiki</a><span class="dark-toggle">🌔</span></div><button class="svg-button close-icon"><svg aria-label="close" role="img" viewBox="0 0 24 24" height="30" width="30" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></button></h3><div class="search-bar"><svg aria-label="search" role="img" viewBox="0 0 16 16" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z"></path></svg><input type="text" class="search-input" aria-label="Search" placeholder="Search..."/></div><div class="aside-content"><ul><li><span class="arrow open">typescript</span><ul><li><a class="" href="/typescript/guideline">guideline</a></li><li><a class="" href="/typescript/type-challenges">type-challenges</a></li><li><a aria-current="page" class="active" href="/typescript/type-config">type-config</a></li></ul></li><li><a class="" href="/README">README</a></li></ul></div></aside></div>
+  </div>
+  
+</body>
+
+</html>
