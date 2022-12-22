@@ -204,6 +204,7 @@ type TupleToIntersection<T> = UnionToIntersection<TupleToUnion<T>>;
 
 ## Miscs
 
+- Display type calculation result: \`type Display<T> = T extends void ? T : {[K in keyof T]: T[K]}\`
 - Recursion
   - depth 49
   - tail call depth 999
